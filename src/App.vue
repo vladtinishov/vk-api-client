@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <CreateCampaign/>
+    <CreateCampaign
+      @campaign_selected="getCampaing"
+    />
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,6 +14,11 @@ export default {
   name: 'App',
   components: {
     CreateCampaign
+  },
+  methods: {
+    getCampaing(id) {
+      console.log(id);
+    }
   }
 }
 </script>
