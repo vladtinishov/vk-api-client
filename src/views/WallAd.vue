@@ -113,6 +113,7 @@ export default({
         createStealthPost() {
             axios.get('api/wall.postAdsStealth?owner_id=-' + auth_data.public_id + '&message=' + this.message + '&attachments=' + this.attachments + '&access_token=' + auth_data.access_token + '&v=5.131')
                 .then((data) => {
+                    console.log(data.data);
                     this.post_id = data.data.response.post_id;
                     this.adsData.link_url = "https://vk.com/wall-" + auth_data.public_id + "_" + this.post_id;
                 });

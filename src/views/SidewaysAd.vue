@@ -9,7 +9,7 @@
                 </div>
                 <div class="section">
                     <label for="cost">Выберите способ оплаты</label>
-                    <select-option id="cost" @gotvalue="getValue" :selectData="selectCost"/>
+                    <select-option id="cost" @gotvalue="clearObject" :selectData="selectCost"/>
                 </div>
                 <div class="section">
                     <div v-if="adsData.cost_type == 0">
@@ -144,9 +144,12 @@ export default ({
         },
         getValue(data) {
             this.adsData[data.name] = parseInt(data.data);
+        },
+        clearObject(data) {
             delete this.adsData.cpc;
             delete this.adsData.cpm;
             delete this.adsData.ocpm;
+            this.getValue(data);
         }
     }
 })
