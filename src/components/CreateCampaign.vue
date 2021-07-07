@@ -1,21 +1,12 @@
 <template>
     <div>
-        <h1>Создать Объявление</h1>
+        <h1>Создать объявление</h1>
         <ul>
-            <li><button @click="getCampaingId(1)"><router-link class="link" to="sideways">Объявление сбоку</router-link></button></li>
-            <li><button @click="getCampaingId(2)"><router-link class="link" to="wall">Объявление в ленте</router-link></button></li>
+            <li><router-link class="link" to="sideways"><button class="btn btn-secondary">Объявление сбоку</button></router-link></li>
+            <li><router-link class="link" to="wall"><button class="btn btn-secondary">Объявление в ленте</button></router-link></li>
         </ul>
     </div>
 </template>
-<script>
-export default ({
-    methods: {
-        getCampaingId(id) {
-            this.$emit('campaign_selected', id);
-        }
-    }
-})
-</script>
 <style scoped>
 ul {
     margin: 0;
@@ -25,15 +16,23 @@ ul {
     width: 100%;
     justify-content: center;
 }
-li button {
-    width: 100px;
-    margin: 5px;
-    background: rgb(48, 84, 151);
-    color: white;
-    border: 1px solid black;
+li {
+    margin: 0 10px;
 }
 .link {
     text-decoration: none;
     color: white;
+}
+div {
+    padding: 50px 0;
+    background: rgb(151, 214, 203);
+    margin-bottom: 20px;
+}
+h1 {
+    margin: 0;
+    padding: 0;
+}
+button {
+    margin-top: 20px;
 }
 </style>

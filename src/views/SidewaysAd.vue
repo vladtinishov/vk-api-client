@@ -9,7 +9,7 @@
                 </div>
                 <div class="section">
                     <label for="cost">Выберите способ оплаты</label>
-                    <select-option id="cost" @gotvalue="getValue" :selectData="selectCost"/>
+                    <select-option id="cost" @gotvalue="clearObject" :selectData="selectCost"/>
                 </div>
                 <div class="section">
                     <div v-if="adsData.cost_type == 0">
@@ -47,12 +47,13 @@
                 </div>
             </div>
         </div>
-        <button @click="create">Create</button>
+        <button @click="create" class="btn btn-outline-primary">Create</button>
     </div>
 </template>
 <script>
 import axios from 'axios'
 import SelectOption from '@/components/SelectOption'
+import {auth_data} from "@/auth.js"
 export default ({
     components: {
         SelectOption,
@@ -108,7 +109,7 @@ export default ({
         }
     },
     created() {
-        axios.get('api/ads.getUploadURL?ad_format=1&access_token=7c17de3deb246cac1187071285e5abadf116246994a9413f421b63f8f84f69665c918f330b77d7a22ec10&v=5.131')
+        axios.get('api/ads.getUploadURL?ad_format=1&access_token=' + auth_data.access_token + '&v=5.131')
             .then((data) => {
                 this.imageUrl = data.data.response.replace("https://pu.vk.com", "");
             });
@@ -126,7 +127,7 @@ export default ({
             .then((data) => {this.adsData.photo = data.data.photo})
         },
         createCampaign() {
-            axios.get('api/ads.createCampaigns?account_id=1603941035&data=[{"client_id":"344701865","type":"normal","name":"camp from ui","status":0}]&access_token=7c17de3deb246cac1187071285e5abadf116246994a9413f421b63f8f84f69665c918f330b77d7a22ec10&v=5.131')
+            axios.get('api/ads.createCampaigns?account_id=' + auth_data.cab_id+ '&data=[{"client_id":"344701865","type":"normal","name":"camp from ui","status":0}]&access_token=' + auth_data.access_token + '&v=5.131')
                 .then((data) => {
                     this.adsData.campaign_id = data.data.response[0].id;
                     console.log(this.adsData.campaign_id);
@@ -135,7 +136,7 @@ export default ({
         },
         createAds() {
 
-            let url = 'api/ads.createAds?account_id=1603941035&data=[' + JSON.stringify(this.adsData) + ']&access_token=7c17de3deb246cac1187071285e5abadf116246994a9413f421b63f8f84f69665c918f330b77d7a22ec10&v=5.131';
+            let url = 'api/ads.createAds?account_id=' + auth_data.cab_id+ '&data=[' + JSON.stringify(this.adsData) + ']&access_token=' + auth_data.access_token + '&v=5.131';
             axios.get(url).then((data) => {console.log(data.data)})
         },
         create() {
@@ -143,9 +144,12 @@ export default ({
         },
         getValue(data) {
             this.adsData[data.name] = parseInt(data.data);
+        },
+        clearObject(data) {
             delete this.adsData.cpc;
             delete this.adsData.cpm;
             delete this.adsData.ocpm;
+            this.getValue(data);
         }
     }
 })
@@ -163,10 +167,6 @@ export default ({
 }
 input {
     width: 100%;
-    height: 20px;
-    border: none;
-    border-bottom: 1px solid;
-    font-size: 15px;
 }
 .section {
     text-align: left;
@@ -175,5 +175,7 @@ input {
 .file-input {
     border: none;
 }
-
+.btn-outline-primary{
+    margin-top: 20px;
+}
 </style>
