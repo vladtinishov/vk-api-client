@@ -1,7 +1,6 @@
 <template>
     <div>
         <h1>Создать Объявление</h1>
-        <p>Chooce your ad variant</p>
         <ul>
             <li><button @click="getCampaingId(1)"><router-link class="link" to="sideways">Объявление сбоку</router-link></button></li>
             <li><button @click="getCampaingId(2)"><router-link class="link" to="wall">Объявление в ленте</router-link></button></li>
