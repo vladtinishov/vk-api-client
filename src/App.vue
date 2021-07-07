@@ -1,26 +1,24 @@
 <template>
   <div id="app">
-    <CreateCampaign
-      @campaign_selected="getCampaing"
-    />
+    <CreateCampaign @campaign_selected="getCampaing" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import CreateCampaign from './components/CreateCampaign.vue'
+import CreateCampaign from "./components/CreateCampaign.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    CreateCampaign
+    CreateCampaign,
   },
   methods: {
     getCampaing(id) {
       console.log(id);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
