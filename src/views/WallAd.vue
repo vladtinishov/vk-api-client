@@ -63,8 +63,8 @@
             :country_id="adsData.country"
           />
         </div>
-        <div class="section">
-          <span v-if="ad_id != ''">ID: {{ ad_id }}</span>
+        <div v-if="ad_id != ''">
+          <a :href="'https://vk.com/ads?act=office&union_id=' + ad_id">реклама</a>
         </div>
       </div>
     </div>

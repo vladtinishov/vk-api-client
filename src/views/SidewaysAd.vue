@@ -76,6 +76,9 @@
             :country_id="adsData.country"
           />
         </div>
+        <div v-if="adsUrl !== ''" class="section">
+          <a :href="'https://vk.com/ads?act=office&union_id=' + adsUrl">реклама</a>
+        </div>
       </div>
     </div>
     <button @click="create" class="btn btn-outline-primary">Create</button>
@@ -150,6 +153,7 @@ export default {
         },
       },
       value: "",
+      adsUrl: "",
     };
   },
   created() {
@@ -204,6 +208,7 @@ export default {
         "&v=5.131";
       axios.get(url).then((data) => {
         console.log(data.data);
+        this.adsUrl = data.data.response[0].id;
       });
     },
     create() {
